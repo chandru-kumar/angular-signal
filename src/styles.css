@@ -1,1 +1,71 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Shared button styles for the app */
+:root {
+  --btn-radius: 8px;
+  --btn-padding-y: 0.4rem;
+  --btn-padding-x: 0.9rem;
+  --btn-font-weight: 600;
+  --btn-primary-bg: linear-gradient(90deg, #7c3aed 0%, #06b6d4 100%); /* violet -> teal */
+  --btn-primary-color: #fff;
+  --btn-ghost-border: rgba(0,0,0,0.08);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font-weight: var(--btn-font-weight);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-color);
+  border-color: transparent;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--btn-ghost-border);
+}
+
+.btn-small {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+}
+
+.controls {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.item-actions .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}

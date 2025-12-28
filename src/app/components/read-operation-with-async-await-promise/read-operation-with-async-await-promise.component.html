@@ -1,0 +1,26 @@
+<section class="read-async">
+  <h2>Read items (async/await + Promise)</h2>
+
+  <div class="controls">
+    <button class="btn btn-primary" (click)="load()" [disabled]="loading()">Refresh</button>
+  </div>
+
+  <div *ngIf="loading()">Loading…</div>
+  <div *ngIf="error()" class="error">Error: {{ error() }}</div>
+
+  <ul>
+    <li *ngFor="let item of items()">
+      <strong>{{ item.name }}</strong> — qty: {{ item.qty }} (id: {{ item.id }})
+    </li>
+  </ul>
+
+  <section class="docs" ngNonBindable>
+    <h3>Notes</h3>
+    <p>This component demonstrates calling an HTTP API using a service that returns Promises (async/await).</p>
+
+    <pre><code>// example usage in component
+const items = await itemsService.list();
+</code></pre>
+  </section>
+</section>
+

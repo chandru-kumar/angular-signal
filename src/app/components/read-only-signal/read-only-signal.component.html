@@ -1,0 +1,50 @@
+<section class="read-only-signal">
+  <h2>Read-only Signal Demo</h2>
+
+  <div class="controls">
+    <button class="btn btn-primary" (click)="increment()">Increment (update)</button>
+    <button class="btn btn-ghost" (click)="reset()">Reset (set)</button>
+
+    <p>
+      Read-only value (exposed via asReadonly()):
+      <strong>{{ count() }}</strong>
+    </p>
+  </div>
+
+  <!-- Documentation / reference -->
+  <section class="signal-docs" aria-labelledby="ros-docs-heading">
+    <h3 id="ros-docs-heading">Read-only Signals — quick reference</h3>
+
+    <p>Create a writable signal and expose a read-only view so consumers can read but not mutate state:</p>
+
+    <pre><code>// writable inside component
+private _count = signal(0);
+
+// expose a read-only view
+readonly count = this._count.asReadonly();
+
+// mutate only inside component
+this._count.update(c => c + 1); // preferred when new value depends on previous
+this._count.set(0);             // replace value (reset)
+
+// template: read the read-only signal using call syntax
+// {{ count() }}
+    </code></pre>
+
+    <h4>When to expose asReadonly()</h4>
+    <ul>
+      <li>Expose asReadonly() from services or components to prevent external mutation.</li>
+      <li>Keep mutation methods (set/update) encapsulated to enforce validation or side-effects.</li>
+    </ul>
+
+    <h4>Best practices</h4>
+    <ul>
+      <li>Prefer update(fn) when the new value depends on the previous value.</li>
+      <li>Do not mutate objects/arrays in-place—return new references.</li>
+      <li>Treat asReadonly() as the public read-only API; keep writable signals private.</li>
+    </ul>
+
+    <p>See Angular Signals docs for advanced patterns (derived signals, effects, stores).</p>
+  </section>
+</section>
+

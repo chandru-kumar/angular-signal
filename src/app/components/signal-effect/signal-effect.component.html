@@ -1,0 +1,41 @@
+<section class="signal-effect">
+  <h2>Signal Effect Demo</h2>
+
+  <div class="controls">
+    <button class="btn btn-primary" (click)="decrement()">-</button>
+    <button class="btn btn-primary" (click)="increment()">+</button>
+    <button class="btn btn-ghost" (click)="reset()">Reset</button>
+  </div>
+
+  <div class="values">
+    <p>count: <strong>{{ count() }}</strong></p>
+    <p>effect runs: <strong>{{ effectRuns() }}</strong></p>
+    <p>last message: <em>{{ lastMessage() || '—' }}</em></p>
+  </div>
+
+  <section class="docs" aria-labelledby="se-docs" ngNonBindable>
+    <h3 id="se-docs">About effects</h3>
+    <p>
+      Use <code>effect(() =&gt; &#123; ... &#125;)</code> to run side-effects in response to signal changes.
+      Effects run synchronously when their tracked dependencies change and should be used for tasks
+      like logging, integration with non-Angular libraries, timers, or other external side-effects.
+    </p>
+
+    <h4>Example</h4>
+    <pre><code>// inside constructor or setup function
+const count = signal(0);
+const lastMessage = signal(null);
+
+effect(() =&gt; &#123;
+  const v = count();
+  lastMessage.set(`Effect observed count = &#36;&#123;v&#125;`);
+&#125;);
+
+// update
+count.update(n =&gt; n + 1);
+</code></pre>
+
+    <p>See Angular Signals docs for guidance on effect cleanup and performance considerations.</p>
+  </section>
+</section>
+

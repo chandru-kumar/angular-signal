@@ -1,0 +1,8 @@
+/* ...existing code... (no global styles required) */
+
+.read-only-signal { margin-bottom: 0.5rem; }
+
+.controls { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem; }
+
+.signal-docs { background: #fafafa; border-radius: 6px; padding: 0.75rem; font-size: 0.95rem; }
+

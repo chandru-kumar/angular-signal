@@ -1,0 +1,55 @@
+<section class="object-array-signal">
+  <h2>Object & Array Signal Demo</h2>
+
+  <div class="controls">
+    <button class="btn btn-primary" (click)="addItem()">Add item</button>
+    <button class="btn btn-ghost" (click)="replaceAll()">Replace all</button>
+    <button class="btn btn-ghost" (click)="clearAll()">Clear</button>
+  </div>
+
+  <ul class="items-list">
+    <li *ngFor="let item of items()" class="item">
+      <div class="item-row">
+        <strong>{{ item.name }}</strong> — qty: {{ item.qty }}
+        <div class="item-actions">
+          <button class="btn btn-small btn-ghost" (click)="incrementQty(item.id)">+1</button>
+          <button class="btn btn-small btn-ghost" (click)="appendStarToName(item.id)">Rename ✨</button>
+          <button class="btn btn-small btn-ghost" (click)="removeItem(item.id)">Remove</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <section class="signal-docs" aria-labelledby="oas-docs-heading" ngNonBindable>
+    <h3 id="oas-docs-heading">Working with objects/arrays in Signals</h3>
+
+    <h4>Best practices</h4>
+    <ul>
+      <li>Keep mutation logic encapsulated (component/service) and expose read-only views if needed.</li>
+      <li>Return new arrays/objects to ensure change detection and derived signals/effects react.</li>
+      <li>Prefer update when new state depends on existing state to avoid race conditions.</li>
+      <li>For object modifications, return a new object: &#123; ...old, prop: newValue &#125;.</li>
+      <li>Use update(prev =&gt; ...) for operations based on current state; use set(...) to replace whole value.</li>
+      <li>Do not mutate arrays/objects in-place. Always return new references so consumers observe changes.</li>
+    </ul>
+
+    <h4>Examples</h4>
+    <pre><code>// add item
+this.items.update(prev => [...prev, newItem]);
+
+// increment qty immutably
+this.items.update(prev =&gt;
+  prev.map(it =&gt; it.id === id ? &#123; ...it, qty: it.qty + 1 &#125; : it)
+);
+
+// remove item
+this.items.update(prev =&gt; prev.filter(it =&gt; it.id !== id));
+
+// replace all
+this.items.set([&#123; id: 42, name: 'Replaced', qty: 10 &#125;]);
+</code></pre>
+
+    <p>See Angular Signals docs for advanced patterns: derived signals, memoization, and effects.</p>
+  </section>
+</section>
+

@@ -1,0 +1,6 @@
+.read-async { padding: 1rem; }
+.read-async .controls { margin-bottom: 1rem; }
+.read-async ul { list-style: none; padding-left: 0; }
+.read-async li { padding: 0.4rem 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+.read-async .error { color: #b91c1c; }
+

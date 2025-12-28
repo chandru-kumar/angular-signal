@@ -1,0 +1,48 @@
+<div class="first-signal">
+  <h2>First Signal Component</h2>
+</div>
+<div>
+  <button class="btn btn-primary" (click)="increment()">Increment using set API</button>
+  <p>Current count: {{ count() }}</p>
+</div>
+
+<div>
+  <button class="btn btn-primary" (click)="updateIncrement()">Increment using update API</button>
+  <p>Current count: {{ count() }}</p>
+</div>
+
+<!-- Explanation section (Angular-docs-style, kept concise for future reference) -->
+<section class="signal-docs">
+  <h3>Signals: set vs update</h3>
+
+  <p>
+    Signals are lightweight reactive primitives. Use
+    <code>signal(initial)</code> to create a signal. Call <code>set(value)</code>
+    to replace the stored value, or <code>update(fn)</code> to compute a new value
+    from the current one.
+  </p>
+
+  <h4>Examples</h4>
+  <pre><code>// increment using set
+count.set(count() + 1);
+
+// increment using update
+count.update(c => c + 1);
+  </code></pre>
+
+  <h4>When to use which</h4>
+  <ul>
+    <li><strong>set</strong>: when you have the final value to store (e.g., reset to 0).</li>
+    <li><strong>update</strong>: when the new value depends on the previous value (preferred for increments).</li>
+  </ul>
+
+  <h4>Best practices</h4>
+  <ul>
+    <li>Prefer <code>update</code> for operations that derive from the current state to avoid race-like mistakes.</li>
+    <li>For objects/arrays, return a new reference (do not mutate in-place) so change detection and consumers observe updates.</li>
+    <li>Both APIs are synchronous and immediately update the signal's value.</li>
+  </ul>
+
+  <p>Reference: Angular Signals documentation for detailed patterns and advanced usage.</p>
+</section>
+
