@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/input-signal/input-signal-parent.component').then(m => m.InputSignalParentComponent)
   },
   {
+    path: 'message',
+    loadComponent: () => import('./components/message/message.component').then(m => m.MessageComponent)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'first-signal'

@@ -1,0 +1,45 @@
+<section class="message-component">
+  <h2>Message (Common)</h2>
+
+  <div class="message-form">
+    <input
+      type="text"
+      placeholder="Enter message to show"
+      [value]="inputText()"
+      (input)="inputText.set($any($event.target).value)"
+      aria-label="Message text"
+    />
+    <button class="btn btn-primary" (click)="submit()">Show message</button>
+  </div>
+
+  <div class="message" *ngIf="message()">
+    <div class="message-content">
+      <span class="text">{{ message() }}</span>
+      <button class="btn btn-link" (click)="clear()" aria-label="Dismiss message">×</button>
+    </div>
+  </div>
+
+  <!-- Documentation -->
+  <section class="signal-docs">
+    <h3>Message Service</h3>
+    <p>
+      This component demonstrates a shared, application-wide message service
+      backed by a readonly signal. Use the textbox above to show a message.
+      The <code>MessageService</code> exposes a readonly signal <code>message</code>
+      and helper methods <code>show(text, durationMs?)</code> and <code>clear()</code>.
+    </p>
+
+    <h4>Why a signal-based service?</h4>
+    <ul>
+      <li>Signals provide a simple reactive source that any component can read.</li>
+      <li>Using a readonly view prevents consumers from mutating internal state.</li>
+      <li>Services can encapsulate auto-clear behavior and formatting concerns.</li>
+    </ul>
+
+    <h4>Example</h4>
+    <pre><code>messageService.show('Saved successfully', 3000);
+// in component template
+&lt;app-message&gt;&lt;/app-message&gt;
+    </code></pre>
+  </section>
+</section>

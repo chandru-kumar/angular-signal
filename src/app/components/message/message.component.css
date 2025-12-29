@@ -1,0 +1,33 @@
+.message {
+  position: sticky;
+  top: 0.5rem;
+  z-index: 40;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.message-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: color-mix(in srgb, var(--bright-blue) 8%, transparent);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--bright-blue) 18%, transparent);
+}
+
+.message .text {
+  color: var(--bright-blue);
+  font-weight: 600;
+}
+
+.message .btn-link {
+  background: transparent;
+  border: 0;
+  color: var(--gray-700);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
