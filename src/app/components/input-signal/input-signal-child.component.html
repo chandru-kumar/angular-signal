@@ -1,0 +1,47 @@
+<div class="employee-card">
+  <p><strong>Full name:</strong> {{ fullName() }}</p>
+  <p><strong>Role:</strong> {{ role() }}</p>
+</div>
+
+<section class="docs" aria-labelledby="is-docs" ngNonBindable>
+  <h3 id="is-docs">About input signals (child)</h3>
+
+  <p>
+    The child explicitly requires a signal instance from its parent using
+    <code>input.required&lt;WritableSignal&lt;Employee&gt;&gt;()</code>. This makes the contract clear: the
+    parent must pass a live <em>WritableSignal&lt;Employee&gt;</em> so the child can read and (optionally) modify it.
+  </p>
+
+  <h4>input.required (contract)</h4>
+  <p>Declaration inside the child:</p>
+  <pre><code>readonly employee = input.required&lt;WritableSignal&lt;Employee&gt;&gt;();</code></pre>
+
+  <p>Parent should pass a signal instance (example):</p>
+  <pre><code>// in parent
+current = signal&lt;Employee&gt;(initialEmployee);
+
+// pass to child
+&lt;app-input-signal-child [employee]="current"&gt;&lt;/app-input-signal-child&gt;
+</code></pre>
+
+  <h4>Alias the passed signal</h4>
+  <p>Inside the child you can create a local alias for the passed signal and then call it when needed:</p>
+  <pre><code>// alias the returned signal (child)
+const sig = this.employee();    // sig is the WritableSignal&lt;Employee&gt; passed by the parent
+const emp = sig();              // emp is the Employee object
+</code></pre>
+
+  <h4>Transform (computed) example</h4>
+  <p>Derive values from the employee using <code>computed()</code>. These update automatically when the parent calls <code>current.set(...)</code>.</p>
+  <pre><code>readonly initials = computed(() =&gt; &#123;
+  const sig = this.employee();
+  const e = sig();
+  return (e.firstName.charAt(0) + e.lastName.charAt(0)).toUpperCase();
+&#125;);
+</code></pre>
+
+  <p>
+    Using <code>input.required</code> and local computed transforms keeps the child small and focused. It reads the live signal instance
+    and derives presentation values; when the parent updates the signal, all derived values update automatically.
+  </p>
+</section>

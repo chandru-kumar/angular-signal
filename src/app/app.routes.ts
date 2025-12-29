@@ -26,6 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('./components/read-operation-with-async-await-promise/read-operation-with-async-await-promise.component').then(m => m.ReadOperationWithAsyncAwaitPromiseComponent)
   },
   {
+    path: 'input-signal',
+    loadComponent: () => import('./components/input-signal/input-signal-parent.component').then(m => m.InputSignalParentComponent)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'first-signal'

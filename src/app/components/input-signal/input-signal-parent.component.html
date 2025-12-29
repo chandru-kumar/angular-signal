@@ -1,0 +1,19 @@
+<section class="input-signal">
+  <h2>Input Signal (required, alias, transform) Demo</h2>
+
+  <div class="controls">
+    <button class="btn btn-primary" (click)="toggle()">Add random employee & select</button>
+  </div>
+
+  <p><strong>Label:</strong> {{ label() }}</p>
+  <p><strong>Initials (transform):</strong> {{ initials() }}</p>
+
+  <h4>Employees</h4>
+  <ul>
+    <li *ngFor="let e of employees()">{{ e.firstName }} {{ e.lastName }} — {{ e.role }}</li>
+  </ul>
+
+  <h3>Child (receives input signal)</h3>
+  <!-- pass the current signal directly; it's always an Employee signal -->
+  <app-input-signal-child [employee]="current"></app-input-signal-child>
+</section>
